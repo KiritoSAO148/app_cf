@@ -71,10 +71,11 @@ export const SelectMenu = memo((props: Props) => {
       <View style={styles.optionItem}>
         <Picker
           selectedValue={priceOptions}
+          style={{color: 'white'}}
           onValueChange={itemValue => setpriceOptions(itemValue as string)}>
           {price.map(data => (
             <Picker.Item
-              style={{color: 'white'}}
+              style={{color: '#000'}}
               key={data.value}
               label={data.title}
               value={data.value}
@@ -105,6 +106,6 @@ const styles = StyleSheet.create({
 
   optionItem: {
     width: '45%',
-    color: 'white',
+    color: '#000',
   },
 });

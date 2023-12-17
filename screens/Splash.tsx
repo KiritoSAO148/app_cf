@@ -39,7 +39,7 @@ export default function Splash() {
   );
 
   return (
-    <SafeAreaView style={{backgroundColor: '#001515'}}>
+    <SafeAreaView style={{backgroundColor: '#fff'}}>
       <StatusBar
         barStyle="light-content"
         backgroundColor="transparent"
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     paddingTop: 30,
     fontWeight: '600',
-    color: black,
+    color: '#fff',
   },
   name: {
     fontSize: 35,
