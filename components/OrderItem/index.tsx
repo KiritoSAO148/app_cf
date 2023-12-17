@@ -46,6 +46,19 @@ const OrderItem = memo((order: OrderItemType) => {
       .finally(() => setIsLoading(false));
   };
 
+  const handleRefure = async () => {
+    setIsLoading(true);
+    dispatch(
+      orderActions.submitStatusOrder({
+        userId: user!._id as string,
+        orderId: order._id as string,
+        status: OrderStatus.refuse,
+      }),
+    )
+      .unwrap()
+      .finally(() => setIsLoading(false));
+  };
+
   const color = getColor(order.status);
   return (
     <View style={{...styles.orderItem, shadowColor: color}}>
@@ -100,7 +113,7 @@ const OrderItem = memo((order: OrderItemType) => {
                 ? 'Người bán đang chuẩn bị hàng'
                 : 'Đang chờ xác nhận'}
             </Text>
-            <TouchableOpacity style={styles.btnPending}>
+            <TouchableOpacity style={styles.btnPending} onPress={handleRefure}>
               <Text style={styles.btnTextPending}>Hủy đơn hàng</Text>
             </TouchableOpacity>
           </View>

@@ -39,7 +39,7 @@ export default function Splash() {
   );
 
   return (
-    <SafeAreaView style={{backgroundColor: '#fff'}}>
+    <SafeAreaView style={{backgroundColor: '#001515'}}>
       <StatusBar
         barStyle="light-content"
         backgroundColor="transparent"

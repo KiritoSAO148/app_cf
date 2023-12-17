@@ -69,6 +69,7 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 20,
     textAlign: 'center',
+    color: 'white',
   },
   list: {
     padding: 20,

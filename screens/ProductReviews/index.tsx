@@ -24,6 +24,8 @@ import moment from 'moment';
 import {CommentType} from '../../types/commentType';
 import commentActions from '../../actions/commentActions';
 import ProductSkeleton from './components/ProductSkeleton';
+import {toastConfig} from '../../components/toastConfig';
+import Toast from 'react-native-toast-message';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ProductReviews'>;
 
@@ -33,8 +35,8 @@ export default function ProductReviews({route, navigation}: Props) {
   const dispatch = useAppDispatch();
   const [rate, setRate] = useState(5);
   const [loading, setLoading] = useState(true);
-  const [commentSelected, setCommentSelected] = useState<string>('');
   const comments = useAppSelector(state => state.comment.comments);
+  const [newComment, setNewComment] = useState('');
 
   const fetchComments = async () => {
     await dispatch(commentActions.getProductComments(productId)).then(() =>
@@ -72,6 +74,23 @@ export default function ProductReviews({route, navigation}: Props) {
         reaction: isLiked(comment) ? 'Unlike' : 'Like',
       }),
     );
+  };
+
+  const handleSendComment = comment => {
+    if (!user?._id) {
+      return Toast.show({type: 'success', text1: 'Yêu cầu đăng nhập!'});
+    }
+    dispatch(
+      commentActions.addComment({
+        userId: user?._id!,
+        productId,
+        content: newComment,
+        commentId: comment._id!,
+        rate: +rate,
+      }),
+    );
+
+    setNewComment('');
   };
 
   return (
@@ -188,20 +207,25 @@ export default function ProductReviews({route, navigation}: Props) {
 
                       <View style={styles.formInput}>
                         <TextInput
-                          defaultValue={commentSelected}
+                          defaultValue={newComment}
                           multiline
                           placeholder="Viết bình luận..."
+                          onChangeText={setNewComment}
                           numberOfLines={1}
-                          style={styles.input}
+                          style={{...styles.input, width: '50%'}}
                         />
-                        <Icon name="send" color={mainColor} />
+                        <Icon
+                          name="send"
+                          color={mainColor}
+                          onPress={handleSendComment}
+                        />
                       </View>
                     </View>
                   </View>
                   <View style={styles.recommends}>
                     {productReviews.map((text, index) => (
                       <Text
-                        onPress={() => setCommentSelected(text)}
+                        onPress={() => setNewComment(text)}
                         style={styles.textRecommend}
                         key={index}>
                         {text}
