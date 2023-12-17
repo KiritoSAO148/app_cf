@@ -5,7 +5,7 @@ import Toast from 'react-native-toast-message';
 
 // let IP = '192.168.0.85'; // ot
 // let IP = '10.68.1.252'; //ticos
-let IP = '192.168.1.8';
+let IP = '192.168.101.101';
 
 const PORT = 5000;
 export const host = `http://${IP}:${PORT}`;

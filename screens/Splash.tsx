@@ -49,7 +49,7 @@ export default function Splash() {
         <View style={styles.content}>
           <Image alt="logo" source={Logo} style={styles.image} />
 
-          <Text style={styles.text}>Bắt đầu mua sắp cùng</Text>
+          <Text style={styles.text}>Bắt đầu mua sắm cùng</Text>
           <Text style={styles.name}>Coffee House</Text>
 
           <View>{loading && <ActivityIndicator color={mainColor} />}</View>
